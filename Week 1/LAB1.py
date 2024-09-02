@@ -1,5 +1,39 @@
-print("file changed")
+import numpy as np
+import matplotlib.pyplot as plt
 
-x = input()
+# %%
+# Q1
+mean, variance = map(float, input("Enter the mean, variance: ").split(", "))
+mean = mean if mean else 0
 
-y = input()
+num_observations = int(input("Enter the number of observations: "))
+
+x = np.random.normal(mean, 1, 1000)
+y = np.random.normal(5, np.sqrt(2), 1000)
+
+print("First three values of x:", x[:3])
+print("First three values of y:", y[:3])
+
+# %%
+# Q2
+numerator, x_denominator, y_denominator = 0.0, 0.0, 0.0
+
+for i in range(0, len(x)):
+    numerator += (x[i]-mean)*(y[i]-5)
+
+for i in range(0, len(x)):
+    x_denominator += (x[i]-mean)**2
+
+for i in range(0, len(x)):
+    y_denominator += (y[i]-5)**2
+
+x_sqrt_denominator = np.sqrt(x_denominator)
+y_sqrt_denominator = np.sqrt(y_denominator)
+
+r = numerator / (x_sqrt_denominator * y_sqrt_denominator)
+
+print("The Pearson's correlation coefficient:", r)
+
+# %%
+# Q3
+
