@@ -37,3 +37,7 @@ print("The Pearson's correlation coefficient:", r)
 # %%
 # Q3
 
+print("The sample mean of random variable x is :", x.mean())
+print("The sample mean of random variable y is :", y.mean())
+print("The sample variance of random variable x is :", x.var())
+print("The sample variance of random variable y is :", y.var())
