@@ -137,6 +137,7 @@ plt.show()
 
 # %%
 # Q11
+plt.figure(figsize=(40, 30))
 plt.plot(data.Date, data.Sales, label="Sales", color='red')
 plt.plot(data.Date, data.AdBudget, label="AdBudget", color='blue')
 plt.plot(data.Date, data.GDP, label="GDP", color='green')
