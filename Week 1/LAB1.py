@@ -45,6 +45,18 @@ print("The sample variance of random variable y is :", y.var())
 # %%
 # Q4
 
+plt.plot(x)
+plt.plot(y)
+plt.xlabel("Sample Index")
+plt.ylabel("Value")
+plt.title("Line plot of x and y")
+plt.legend()
+
+plt.show()
+
+# %%
+# Q5
+
 plt.hist(x)
 plt.hist(y)
 plt.xlabel("Sample Index")
@@ -53,3 +65,7 @@ plt.title("Histogram of x and y")
 plt.legend()
 
 plt.show()
+
+# %%
+# Q5
+
