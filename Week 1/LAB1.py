@@ -44,25 +44,15 @@ print("First three values of y:", y[:3])
 # Q2
 
 def r(x, y):
-    numerator, x_denominator, y_denominator = 0.0, 0.0, 0.0
-    mu_x = x.mean()
-    mu_y = y.mean()
+    mu_x = np.mean(x)
+    mu_y = np.mean(y)
 
-    for i in range(0, len(x)):
-        numerator += (x[i] - mu_x) * (y[i] - 5)
+    numerator = np.sum((x-mu_x)*(y-5))
+    denominator = np.sqrt(np.sum((x-mu_x)**2))*np.sqrt(np.sum((y-mu_y)**2))
 
-    for i in range(0, len(x)):
-        x_denominator += (x[i] - mu_x) ** 2
+    return numerator / denominator
 
-    for i in range(0, len(x)):
-        y_denominator += (y[i] - mu_y) ** 2
-
-    x_sqrt_denominator = np.sqrt(x_denominator)
-    y_sqrt_denominator = np.sqrt(y_denominator)
-
-    return numerator / (x_sqrt_denominator * y_sqrt_denominator)
-
-print("The Pearson's correlation coefficient:", r)
+print("The Pearson's correlation coefficient:", r(x, y))
 
 # %%
 # Q3
