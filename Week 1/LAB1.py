@@ -4,34 +4,49 @@ import pandas as pd
 
 # %%
 # Q1
-mu, variance = map(float, input("Enter the mean, variance: ").split(", "))
-mu = mu if mu else 0
+mu_x = input("Please enter the first mean:")
+variance_x = input("Please enter the first variance:")
+num_observations_x = input("Please enter the first number of observations:")
+mu_y = input("Please enter the second mean:")
+variance_y = input("Please enter the second variance:")
+num_observations_y = input("Please enter the second number of observations:")
 
-num_observations = int(input("Enter the number of observations: "))
+# set default
+mu_x = mu_x if isinstance(mu_x, (int, float)) else 0
+variance_x = isinstance(variance_x, (int, float)) if variance_x else 1
+num_observations_x = num_observations_x if isinstance(num_observations_x, (int, float)) else 1000
 
-x = np.random.normal(mu, 1, 1000)
-y = np.random.normal(5, np.sqrt(2), 1000)
+mu_y = mu_y if isinstance(mu_y, (int, float)) else 0
+variance_y = isinstance(variance_y, (int, float)) if variance_y else np.sqrt(2)
+num_observations_y = num_observations_y if isinstance(num_observations_y, (int, float)) else 1000
+
+x = np.random.normal(mu_x, variance_x, num_observations_x)
+y = np.random.normal(mu_y, variance_y, num_observations_y)
 
 print("First three values of x:", x[:3])
 print("First three values of y:", y[:3])
 
 # %%
 # Q2
-numerator, x_denominator, y_denominator = 0.0, 0.0, 0.0
 
-for i in range(0, len(x)):
-    numerator += (x[i]-mu)*(y[i]-5)
+def r(x, y):
+    numerator, x_denominator, y_denominator = 0.0, 0.0, 0.0
+    mu_x = x.mean()
+    mu_y = y.mean()
 
-for i in range(0, len(x)):
-    x_denominator += (x[i]-mu)**2
+    for i in range(0, len(x)):
+        numerator += (x[i] - mu_x) * (y[i] - 5)
 
-for i in range(0, len(x)):
-    y_denominator += (y[i]-5)**2
+    for i in range(0, len(x)):
+        x_denominator += (x[i] - mu_x) ** 2
 
-x_sqrt_denominator = np.sqrt(x_denominator)
-y_sqrt_denominator = np.sqrt(y_denominator)
+    for i in range(0, len(x)):
+        y_denominator += (y[i] - mu_y) ** 2
 
-r = numerator / (x_sqrt_denominator * y_sqrt_denominator)
+    x_sqrt_denominator = np.sqrt(x_denominator)
+    y_sqrt_denominator = np.sqrt(y_denominator)
+
+    return numerator / (x_sqrt_denominator * y_sqrt_denominator)
 
 print("The Pearson's correlation coefficient:", r)
 
@@ -77,3 +92,8 @@ print(data.head())
 
 
 # %%
+# Q7
+
+print("The sample Pearson’s correlation coefficient between Sales & AdBudget is:", )
+print("The sample Pearson’s correlation coefficient between Sales & GDP is:")
+print("The sample Pearson’s correlation coefficient between AdBudget & GDP is:")
