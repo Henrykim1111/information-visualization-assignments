@@ -159,6 +159,4 @@ plt.ylabel("Frequency")
 plt.title("Histogram of Sales, AdBudget, and GDP")
 plt.legend()
 
-plt.xticks(rotation=45, ha='right')
-
 plt.show()
