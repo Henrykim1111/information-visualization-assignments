@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 # %%
 # Q1
@@ -67,5 +68,10 @@ plt.legend()
 plt.show()
 
 # %%
-# Q5
+# Q6
+
+url = 'https://raw.githubusercontent.com/nealxun/forecasting_principle_and_practices/master/extrafiles/tute1.csv'
+data = pd.read_csv(url)
+
+print(data.head())
 
