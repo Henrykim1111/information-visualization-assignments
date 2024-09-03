@@ -4,21 +4,35 @@ import pandas as pd
 
 # %%
 # Q1
-mu_x = input("Please enter the first mean:")
-variance_x = input("Please enter the first variance:")
-num_observations_x = input("Please enter the first number of observations:")
-mu_y = input("Please enter the second mean:")
-variance_y = input("Please enter the second variance:")
-num_observations_y = input("Please enter the second number of observations:")
 
-# set default
-mu_x = mu_x if isinstance(mu_x, (int, float)) else 0
-variance_x = isinstance(variance_x, (int, float)) if variance_x else 1
-num_observations_x = num_observations_x if isinstance(num_observations_x, (int, float)) else 1000
+def get_float_input(prompt, default_float):
+    while True:
+        user_input = input(prompt)
+        try:
+            return float(user_input)
+        except ValueError:
+            print(f"Invalid input. Returning default value: {default_float}")
+            return default_float
 
-mu_y = mu_y if isinstance(mu_y, (int, float)) else 0
-variance_y = isinstance(variance_y, (int, float)) if variance_y else np.sqrt(2)
-num_observations_y = num_observations_y if isinstance(num_observations_y, (int, float)) else 1000
+def get_int_input(prompt, default_int):
+    while True:
+        user_input = input(prompt)
+        try:
+            return int(user_input)
+        except ValueError:
+            print(f"Invalid input. Returning default value: {default_int}")
+            return default_int
+
+mu_x = get_float_input("Please enter the first mean:", 0)
+variance_x = get_float_input("Please enter the first variance:", 1)
+num_observations_x = get_int_input("Please enter the first number of observations:", 1000)
+mu_y = get_float_input("Please enter the second mean:", 5)
+variance_y = get_float_input("Please enter the second variance:", 2)
+num_observations_y = get_int_input("Please enter the second number of observations:", 1000)
+
+while num_observations_x != num_observations_y:
+    print("The first number of observations should be the same as the second number of observations")
+    num_observations_y = get_int_input("Please enter the second number of observations:", num_observations_y)
 
 x = np.random.normal(mu_x, variance_x, num_observations_x)
 y = np.random.normal(mu_y, variance_y, num_observations_y)
