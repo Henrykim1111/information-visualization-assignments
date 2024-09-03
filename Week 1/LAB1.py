@@ -75,3 +75,5 @@ data = pd.read_csv(url)
 
 print(data.head())
 
+
+# %%
