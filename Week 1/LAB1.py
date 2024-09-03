@@ -67,8 +67,8 @@ print("The sample variance of random variable y is :", np.var(y))
 
 plt.plot(x, label=f'mean : {mu_x}, variance : {variance_x}', color='blue')
 plt.plot(y, label=f'mean : {mu_y}, variance : {variance_y}', color='red')
-plt.xlabel("Sample Index")
-plt.ylabel("Values")
+plt.xlabel("Index")
+plt.ylabel("Value")
 plt.title("Line plot of x and y")
 plt.legend()
 
@@ -79,8 +79,8 @@ plt.show()
 
 plt.hist(x, label=f'mean : {mu_x}, variance : {variance_x}', color='blue')
 plt.hist(y, label=f'mean : {mu_y}, variance : {variance_y}', color='red')
-plt.xlabel("Sample Index")
-plt.ylabel("Values")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
 plt.title("Histogram of x and y")
 plt.legend()
 
@@ -137,8 +137,6 @@ plt.show()
 
 # %%
 # Q11
-plt.figure(figsize=(120,60))
-
 plt.plot(data.Date, data.Sales, label="Sales", color='red')
 plt.plot(data.Date, data.AdBudget, label="AdBudget", color='blue')
 plt.plot(data.Date, data.GDP, label="GDP", color='green')
@@ -150,3 +148,7 @@ plt.legend()
 plt.xticks(rotation=45, ha='right')
 
 plt.show()
+
+# %%
+# Q12
+
