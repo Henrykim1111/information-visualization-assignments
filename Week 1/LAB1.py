@@ -34,8 +34,8 @@ while num_observations_x != num_observations_y:
     print("The first number of observations should be the same as the second number of observations")
     num_observations_y = get_int_input("Please enter the second number of observations:", num_observations_y)
 
-x = np.random.normal(mu_x, variance_x, num_observations_x)
-y = np.random.normal(mu_y, variance_y, num_observations_y)
+x = np.random.normal(mu_x, np.sqrt(variance_x), num_observations_x)
+y = np.random.normal(mu_y, np.sqrt(variance_y), num_observations_y)
 
 print("First three values of x:", x[:3])
 print("First three values of y:", y[:3])
@@ -57,18 +57,18 @@ print("The Pearson's correlation coefficient:", r(x, y))
 # %%
 # Q3
 
-print("The sample mean of random variable x is :", x.mean())
-print("The sample mean of random variable y is :", y.mean())
-print("The sample variance of random variable x is :", x.var())
-print("The sample variance of random variable y is :", y.var())
+print("The sample mean of random variable x is :", np.mean(x))
+print("The sample mean of random variable y is :", np.mean(y))
+print("The sample variance of random variable x is :", np.var(x))
+print("The sample variance of random variable y is :", np.var(y))
 
 # %%
 # Q4
 
-plt.plot(x)
-plt.plot(y)
+plt.plot(x, label=f'mean : {mu_x}, variance : {variance_x}', color='blue')
+plt.plot(y, label=f'mean : {mu_y}, variance : {variance_y}', color='red')
 plt.xlabel("Sample Index")
-plt.ylabel("Value")
+plt.ylabel("Values")
 plt.title("Line plot of x and y")
 plt.legend()
 
@@ -77,10 +77,10 @@ plt.show()
 # %%
 # Q5
 
-plt.hist(x)
-plt.hist(y)
+plt.hist(x, label=f'mean : {mu_x}, variance : {variance_x}', color='blue')
+plt.hist(y, label=f'mean : {mu_y}, variance : {variance_y}', color='red')
 plt.xlabel("Sample Index")
-plt.ylabel("Value")
+plt.ylabel("Values")
 plt.title("Histogram of x and y")
 plt.legend()
 
@@ -89,7 +89,7 @@ plt.show()
 # %%
 # Q6
 
-url = 'https://raw.githubusercontent.com/nealxun/forecasting_principle_and_practices/master/extrafiles/tute1.csv'
+url = 'https://raw.githubusercontent.com/rjafari979/Information-Visualization-Data-Analytics-Dataset-/main/tute1.csv'
 data = pd.read_csv(url)
 
 print(data.head())
@@ -98,6 +98,55 @@ print(data.head())
 # %%
 # Q7
 
-print("The sample Pearson’s correlation coefficient between Sales & AdBudget is:", )
-print("The sample Pearson’s correlation coefficient between Sales & GDP is:")
-print("The sample Pearson’s correlation coefficient between AdBudget & GDP is:")
+print("The sample Pearson’s correlation coefficient between Sales & AdBudget is:", r(data.Sales, data.AdBudget))
+print("The sample Pearson’s correlation coefficient between Sales & GDP is:", r(data.GDP, data.Sales))
+print("The sample Pearson’s correlation coefficient between AdBudget & GDP is:", r(data.AdBudget, data.GDP))
+
+# %%
+# Q8
+
+plt.scatter(data.Sales, data.AdBudget)
+plt.title(f"r: {r(data.Sales, data.AdBudget)}")
+plt.xlabel("Sales")
+plt.ylabel("AdBudget")
+plt.grid(True)
+
+plt.show()
+
+# %%
+# Q9
+
+plt.scatter(data.Sales, data.GDP)
+plt.title(f"r: {r(data.Sales, data.GDP)}")
+plt.xlabel("Sales")
+plt.ylabel("GDP")
+plt.grid(True)
+
+plt.show()
+
+# %%
+# Q10
+
+plt.scatter(data.GDP, data.AdBudget)
+plt.title(f"r: {r(data.GDP, data.AdBudget)}")
+plt.xlabel("GDP")
+plt.ylabel("AdBudget")
+plt.grid(True)
+
+plt.show()
+
+# %%
+# Q11
+plt.figure(figsize=(120,60))
+
+plt.plot(data.Date, data.Sales, label="Sales", color='red')
+plt.plot(data.Date, data.AdBudget, label="AdBudget", color='blue')
+plt.plot(data.Date, data.GDP, label="GDP", color='green')
+plt.xlabel("Date")
+plt.ylabel("Values")
+plt.title("Sales, AdBudget, and GDP Over Time")
+plt.legend()
+
+plt.xticks(rotation=45, ha='right')
+
+plt.show()
