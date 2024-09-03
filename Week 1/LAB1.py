@@ -151,4 +151,14 @@ plt.show()
 
 # %%
 # Q12
+plt.hist(data.Sales, label="Sales", color='red')
+plt.hist(data.AdBudget, label="AdBudget", color='blue')
+plt.hist(data.GDP, label="GDP", color='green')
+plt.xlabel("Values")
+plt.ylabel("Frequency")
+plt.title("Histogram of Sales, AdBudget, and GDP")
+plt.legend()
 
+plt.xticks(rotation=45, ha='right')
+
+plt.show()
