@@ -1,4 +1,4 @@
-# 97 / 100
+# Score: 97 / 100
 # -2 [All numbers must be displayed with [2-digit precision] 1.10 2.10 3.10 4.10 5.10 6.5 7.10 8.5 9.5 10.5 11.9,
 # -1 xticks unreadability 12.10
 
