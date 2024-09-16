@@ -116,3 +116,73 @@ tips_group.plot(kind = 'bar',
 
 plt.tight_layout()
 plt.show()
+
+#%% Histogram Plot
+tips[['tip', 'total_bill']].plot(
+    kind = 'hist',
+    grid = True,
+    bins =  50,
+    stacked = True,
+    title = 'hist plot',
+    orientation = 'vertical',
+    alpha = 0.5
+)
+plt.tight_layout()
+plt.show()
+
+#%% Pie Chart
+explode = (0.01, 0.1, 0.01, 0.01)
+tips_group = tips.loc[:,['day', 'total_bill']].groupby('day').sum()
+tips_group.plot(
+    kind = 'pie',
+    y = 'total_bill',
+    autopct = '%1.0f%%',
+    explode = explode,
+)
+plt.tight_layout()
+plt.show()
+
+#%% gender_in_code
+def change(x):
+    if x == 'Male':
+        return 1
+    elif x == 'Female':
+        return 2
+
+tips['sex_encoded'] = tips['sex'].apply(change)
+print(tips.head())
+
+#%%
+tips = sns.load_dataset('tips')
+
+tips['sex_encoded'] = tips['sex'].apply(
+    lambda x : 2 if x == 'Female' else 1
+)
+print(tips.head())
+
+#%% Create a new feature called tip_pct
+
+tips['tip_pct'] = 100 * tips['tip'] / tips['total_bill']
+print(tips.head())
+
+#%% Cleaning check
+titanic = sns.load_dataset('titanic')
+missing_value = titanic.isna().sum()
+
+print(missing_value)
+
+#%% fill the missing age with mean of age
+titanic['age'].fillna(titanic['age'].mean(), inplace = True)
+titanic['deck'].fillna(titanic['deck'].mode()[0], inplace = True)
+missing_value = titanic.isna().sum()
+
+print(missing_value)
+
+#%%
+titanic.columns
+
+titanic_male = titanic[titanic['sex']=='male'].count()[0]
+titanic_female = titanic[titanic['sex']=='female'].count()[0]
+
+print(f'\nthere are {titanic_male} male on board')
+print(f'\nthere are {titanic_female} female on board')
