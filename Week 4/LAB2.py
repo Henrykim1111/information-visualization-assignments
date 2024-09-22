@@ -167,7 +167,7 @@ for i, stock in enumerate(stocks):
     row = int(i / 2)
     col = i % 2
     ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+    ax[row, col].set_title(f'Low price history of {stock}', fontsize = 15)
     ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
     ax[row, col].set_ylabel('Frequency', fontsize = 15)
     ax[row, col].grid(True)
@@ -187,7 +187,7 @@ for i, stock in enumerate(stocks):
     row = int(i / 2)
     col = i % 2
     ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+    ax[row, col].set_title(f'Open price history of {stock}', fontsize = 15)
     ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
     ax[row, col].set_ylabel('Frequency', fontsize = 15)
     ax[row, col].grid(True)
@@ -207,7 +207,7 @@ for i, stock in enumerate(stocks):
     row = int(i / 2)
     col = i % 2
     ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+    ax[row, col].set_title(f'Close price history of {stock}', fontsize = 15)
     ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
     ax[row, col].set_ylabel('Frequency', fontsize = 15)
     ax[row, col].grid(True)
@@ -227,7 +227,7 @@ for i, stock in enumerate(stocks):
     row = int(i / 2)
     col = i % 2
     ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+    ax[row, col].set_title(f'Volume price history of {stock}', fontsize = 15)
     ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
     ax[row, col].set_ylabel('Frequency', fontsize = 15)
     ax[row, col].grid(True)
@@ -247,7 +247,7 @@ for i, stock in enumerate(stocks):
     row = int(i / 2)
     col = i % 2
     ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+    ax[row, col].set_title(f'Adj Close price history of {stock}', fontsize = 15)
     ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
     ax[row, col].set_ylabel('Frequency', fontsize = 15)
     ax[row, col].grid(True)
@@ -269,6 +269,7 @@ pd.plotting.scatter_matrix(features,
                            diagonal='kde',
                            figsize=(10,10)
                            )
+plt.suptitle('Scatter Matrix of AAPL Stock Features', fontsize=15)
 
 plt.tight_layout()
 plt.show()
@@ -287,6 +288,9 @@ pd.plotting.scatter_matrix(features,
                            figsize=(10,10)
                            )
 
+plt.suptitle('Scatter Matrix of ORCL Stock Features', fontsize=15)
+
+
 plt.tight_layout()
 plt.show()
 
@@ -303,6 +307,9 @@ pd.plotting.scatter_matrix(features,
                            diagonal='kde',
                            figsize=(10,10)
                            )
+
+plt.suptitle('Scatter Matrix of TSLA Stock Features', fontsize=15)
+
 
 plt.tight_layout()
 plt.show()
@@ -321,6 +328,9 @@ pd.plotting.scatter_matrix(features,
                            figsize=(10,10)
                            )
 
+plt.suptitle('Scatter Matrix of IBM Stock Features', fontsize=15)
+
+
 plt.tight_layout()
 plt.show()
 
@@ -338,6 +348,9 @@ pd.plotting.scatter_matrix(features,
                            figsize=(10,10)
                            )
 
+plt.suptitle('Scatter Matrix of YELP Stock Features', fontsize=15)
+
+
 plt.tight_layout()
 plt.show()
 
@@ -354,6 +367,9 @@ pd.plotting.scatter_matrix(features,
                            diagonal='kde',
                            figsize=(10,10)
                            )
+
+plt.suptitle('Scatter Matrix of MSFT Stock Features', fontsize=15)
+
 
 plt.tight_layout()
 plt.show()
