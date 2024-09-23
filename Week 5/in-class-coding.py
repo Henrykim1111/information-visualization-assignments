@@ -92,7 +92,7 @@ x = np.linspace(0,10)
 y = [10 ** el for el in x]
 z = [2 ** el for el in x]
 
-fig, ax = plt.subplots(2,2)
+fig, ax = plt.subplots(2,2, figsize = (10,8))
 
 
 ax[0,0].plot(x,y, color = 'blue', lw=3)
