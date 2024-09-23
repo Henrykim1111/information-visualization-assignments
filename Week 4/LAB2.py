@@ -7,27 +7,36 @@ pd.set_option('display.float_format', '{:.2f}'.format)
 
 stocks = ['AAPL', 'ORCL', 'TSLA', 'IBM', 'YELP', 'MSFT']
 start_date = '2000-01-01'
+# '2010-06-29'
+start_date_tsla = df['TSLA'].first_valid_index()
+# '2012-03-02'
+start_date_yelp = df['YELP'].first_valid_index()
 end_date = '2023-08-28'
 
 #%% Q1
 
 df = yf.download(stocks, start=start_date, end=end_date)['High']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df_tsla = yf.download(stocks, start=start_date_tsla, end=end_date)['High']
+df_yelp = yf.download(stocks, start=start_date_yelp, end=end_date)['High']
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('High price USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
 
-plt.tight_layout()
-plt.show()
+
+# flg, ax=plt.subplots(3,2,
+#                      figsize = (16,8),
+#                      )
+#
+# for i, stock in enumerate(stocks):
+#     row = int(i / 2)
+#     col = i % 2
+#     ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
+#     ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
+#     ax[row, col].set_xlabel('Date', fontsize = 15)
+#     ax[row, col].set_ylabel('High price USD($)', fontsize = 15)
+#     ax[row, col].grid(True)
+#     ax[row, col].legend(loc='upper left', fontsize = 15)
+#
+# plt.tight_layout()
+# plt.show()
 
 #%% Q2 - Low
 
