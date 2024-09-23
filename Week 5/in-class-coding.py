@@ -123,3 +123,71 @@ ax[1,1].grid(visible=True, which = 'both', axis = 'both')
 
 plt.tight_layout()
 plt.show()
+
+
+#%% Reading mnist Dataset
+
+url ="https://raw.githubusercontent.com/rjafari979/Information-Visualization-Data-Analytics-Dataset-/refs/heads/main/mnist_test.csv"
+import pandas as pd
+
+df = pd.read_csv(url)
+print(df.shape)
+
+#%% plot function
+
+def plot(df, row, col):
+    plt.figure()
+    for i in range(row*col):
+        len_df = df.shape[1] # or len(df)
+        pic = df.iloc[i,:].values.reshape(len_df)[1:].reshape(28,28)
+        plt.subplot(row,col, i+1)
+        plt.imshow(pic)
+    plt.tight_layout
+    plt.show()
+
+#%% Reading mnist Dataset and plot only the
+
+df_zeros = df[df['label']==0]
+row, col = 5, 5
+plot(df_zeros, row, col)
+
+plt.tight_layout
+plt.show()
+
+#%% Plotting Decision Boundary for four classes
+
+PP = np.array([[1,4],[1,5],[2,4],[2,5],[3,1],[3,2],[4,1],[4,2],[-1,1],[-1,2],[0,1],[0,2],[2,0],[2,-1],[3,0],[3,-1]]).T
+
+figure, ax = plt.subplots(figsize = (8,8))
+ax.scatter(PP[0,:4],PP[1,:4],
+           color='r',
+           label='I',
+           marker='^',
+           s=200)
+
+ax.scatter(PP[4,:8],PP[1,:4],
+           color='r',
+           label='I',
+           marker='^',
+           s=200)
+
+ax.scatter(PP[8,:12],PP[1,:4],
+           color='r',
+           label='I',
+           marker='^',
+           s=200)
+
+ax.scatter(PP[0,:4],PP[1,:4],
+           color='r',
+           label='I',
+           marker='^',
+           s=200)
+
+w = np.array([[-1.7, 1.4], [2.1,2.5]])
+b = np.array([[0.3],[-7.4]])
+
+x=np.linespace(-2,6,1000)
+y1 = (-)
+plt.show()
+
+ax
