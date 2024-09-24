@@ -161,33 +161,44 @@ PP = np.array([[1,4],[1,5],[2,4],[2,5],[3,1],[3,2],[4,1],[4,2],[-1,1],[-1,2],[0,
 figure, ax = plt.subplots(figsize = (8,8))
 ax.scatter(PP[0,:4],PP[1,:4],
            color='r',
-           label='I',
+           label='Group 1',
            marker='^',
            s=200)
 
-ax.scatter(PP[4,:8],PP[1,:4],
-           color='r',
-           label='I',
-           marker='^',
+ax.scatter(PP[0,4:8],PP[1,4:8],
+           color='b',
+           label='Group 2',
+           marker='o',
            s=200)
 
-ax.scatter(PP[8,:12],PP[1,:4],
-           color='r',
-           label='I',
-           marker='^',
+ax.scatter(PP[0,8:12],PP[1,8:12],
+           color='g',
+           label='Group 3',
+           marker='s',
            s=200)
 
-ax.scatter(PP[0,:4],PP[1,:4],
-           color='r',
-           label='I',
-           marker='^',
+ax.scatter(PP[0,12:16],PP[1,12:16],
+           color='y',
+           label='Group 4',
+           marker='*',
            s=200)
 
 w = np.array([[-1.7, 1.4], [2.1,2.5]])
 b = np.array([[0.3],[-7.4]])
 
-x=np.linespace(-2,6,1000)
-y1 = (-)
-plt.show()
+x = np.linspace(-2, 6, 1000)
 
-ax
+y1 = (-w[0, 0] * x - b[0]) / w[0, 1]
+y2 = (-w[1, 0] * x - b[1]) / w[1, 1]
+
+ax.plot(x, y1, label='Line 1', color='black', linestyle='--')
+ax.plot(x, y2, label='Line 2', color='purple', linestyle='--')
+
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_xlim([-2, 6])
+ax.set_ylim([-3, 6])
+ax.legend()
+ax.grid(True)
+
+plt.show()
