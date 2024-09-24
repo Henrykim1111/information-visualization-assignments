@@ -2,10 +2,12 @@
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
+import datetime
 
 pd.set_option('display.float_format', '{:.2f}'.format)
 
 stocks = ['AAPL', 'ORCL', 'TSLA', 'IBM', 'YELP', 'MSFT']
+
 start_date = '2000-01-01'
 # '2010-06-29'
 start_date_tsla = df['TSLA'].first_valid_index()
@@ -13,48 +15,118 @@ start_date_tsla = df['TSLA'].first_valid_index()
 start_date_yelp = df['YELP'].first_valid_index()
 end_date = '2023-08-28'
 
+start_date = pd.to_datetime(start_date)
+end_date = pd.to_datetime(end_date)
+start_date_tsla = pd.to_datetime(start_date_tsla)
+start_date_yelp = pd.to_datetime(start_date_yelp)
+
 #%% Q1
 
 df = yf.download(stocks, start=start_date, end=end_date)['High']
-df_tsla = yf.download(stocks, start=start_date_tsla, end=end_date)['High']
-df_yelp = yf.download(stocks, start=start_date_yelp, end=end_date)['High']
+df = df[stocks]
 
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'High price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
 
+ax[0,0].set_title('High price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
 
-# flg, ax=plt.subplots(3,2,
-#                      figsize = (16,8),
-#                      )
-#
-# for i, stock in enumerate(stocks):
-#     row = int(i / 2)
-#     col = i % 2
-#     ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-#     ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
-#     ax[row, col].set_xlabel('Date', fontsize = 15)
-#     ax[row, col].set_ylabel('High price USD($)', fontsize = 15)
-#     ax[row, col].grid(True)
-#     ax[row, col].legend(loc='upper left', fontsize = 15)
-#
-# plt.tight_layout()
-# plt.show()
+ax[0,1].set_title('High price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('High price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('High price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('High price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('High price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
+
+plt.tight_layout()
+plt.show()
 
 #%% Q2 - Low
 
 
 df = yf.download(stocks, start=start_date, end=end_date)['Low']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'Low price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('Low price USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'Low price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Low price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Low price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Low price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Low price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Low price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Low price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -63,19 +135,54 @@ plt.show()
 
 
 df = yf.download(stocks, start=start_date, end=end_date)['Open']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'Open price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('Open price USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'Open price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Open price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Open price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Open price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Open price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Open price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Open price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -84,19 +191,54 @@ plt.show()
 
 
 df = yf.download(stocks, start=start_date, end=end_date)['Close']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'Close price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('Close price USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'Close price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Close price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Close price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Close price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Close price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Close price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Close price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -105,19 +247,54 @@ plt.show()
 
 
 df = yf.download(stocks, start=start_date, end=end_date)['Volume']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'Volume history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('Volume USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'Volume price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Volume price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Volume price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Volume price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Volume price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Volume price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Volume price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -126,19 +303,54 @@ plt.show()
 
 
 df = yf.download(stocks, start=start_date, end=end_date)['Adj Close']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].plot(df.index, df[stock], label=stock, lw=3)
-    ax[row, col].set_title(f'Adj Close price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Date', fontsize = 15)
-    ax[row, col].set_ylabel('Adj Close price USD($)', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper left', fontsize = 15)
+ax = df.plot(subplots = True,
+             layout = (3,2),
+             ylabel = 'Adj Close price USD($)',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Adj Close price history of AAPL')
+ax[0,0].set_xlabel('Date', fontsize = 15)
+ax[0,0].set_xlim([start_date, end_date])
+ax[0,0].legend(loc='upper left', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Adj Close price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].set_xlim([start_date, end_date])
+ax[0,1].legend(loc='upper left', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Adj Close price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].set_xlim([start_date_tsla, end_date])
+ax[1,0].legend(loc='upper left', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Adj Close price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].set_xlim([start_date, end_date])
+ax[1,1].legend(loc='upper left', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Adj Close price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].set_xlim([start_date_yelp, end_date])
+ax[2,0].legend(loc='upper left', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Adj Close price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].set_xlim([start_date, end_date])
+ax[2,1].legend(loc='upper left', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -146,19 +358,50 @@ plt.show()
 #%% Q3
 
 df = yf.download(stocks, start=start_date, end=end_date)['High']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'High price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('High price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('High price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('High price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('High price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('High price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('High price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -166,19 +409,50 @@ plt.show()
 #%% Q4 - Low
 
 df = yf.download(stocks, start=start_date, end=end_date)['Low']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'Low price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Low price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Low price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Low price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Low price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Low price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Low price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -186,19 +460,50 @@ plt.show()
 #%% Q4 - Open
 
 df = yf.download(stocks, start=start_date, end=end_date)['Open']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'Open price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Open price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Open price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Open price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Open price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Open price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Open price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
@@ -206,59 +511,154 @@ plt.show()
 #%% Q4 - Close
 
 df = yf.download(stocks, start=start_date, end=end_date)['Close']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
+df = df[stocks]
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'Close price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Close price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Close price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Close price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Close price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Close price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Close price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
 
 #%% Q4 - Volume
 
-df = yf.download(stocks, start=start_date, end=end_date)['Volume']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'Volume price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+df = yf.download(stocks, start=start_date, end=end_date)['Volume']
+df = df[stocks]
+
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Volume price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Volume price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Volume price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Volume price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Volume price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Volume price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
 
 #%% Q4 - Adj Close
 
-df = yf.download(stocks, start=start_date, end=end_date)['Adj Close']
-flg, ax=plt.subplots(3,2,
-                     figsize = (16,8),
-                     )
 
-for i, stock in enumerate(stocks):
-    row = int(i / 2)
-    col = i % 2
-    ax[row, col].hist(df[stock], bins=50, label=stock)
-    ax[row, col].set_title(f'Adj Close price history of {stock}', fontsize = 15)
-    ax[row, col].set_xlabel('Value in USD($)', fontsize = 15)
-    ax[row, col].set_ylabel('Frequency', fontsize = 15)
-    ax[row, col].grid(True)
-    ax[row, col].legend(loc='upper right', fontsize = 15)
+df = yf.download(stocks, start=start_date, end=end_date)['Adj Close']
+df = df[stocks]
+
+ax = df.plot(subplots = True,
+             kind = 'hist',
+             bins=50,
+             layout = (3,2),
+             ylabel = 'Frequency',
+             figsize = (16,8),
+             lw = 3,
+             fontsize = 15,
+             grid = True,
+             legend = True,
+             color = '#1f77b4'
+             )
+
+ax[0,0].set_title('Adj Close price history of AAPL')
+ax[0,0].set_xlabel('Value in USD($)', fontsize = 15)
+ax[0,0].legend(loc='upper right', fontsize=15)
+ax[0,0].tick_params(axis='x', rotation=0)
+
+ax[0,1].set_title('Adj Close price history of ORCL', fontsize = 15)
+ax[0,1].set_xlabel('Date', fontsize = 15)
+ax[0,1].legend(loc='upper right', fontsize=15)
+ax[0,1].tick_params(axis='x', rotation=0)
+
+ax[1,0].set_title('Adj Close price history of TSLA', fontsize = 15)
+ax[1,0].set_xlabel('Date', fontsize = 15)
+ax[1,0].legend(loc='upper right', fontsize=15)
+ax[1,0].tick_params(axis='x', rotation=0)
+
+ax[1,1].set_title('Adj Close price history of IBM', fontsize = 15)
+ax[1,1].set_xlabel('Date', fontsize = 15)
+ax[1,1].legend(loc='upper right', fontsize=15)
+ax[1,1].tick_params(axis='x', rotation=0)
+
+ax[2,0].set_title('Adj Close price history of YELP', fontsize = 15)
+ax[2,0].set_xlabel('Date', fontsize = 15)
+ax[2,0].legend(loc='upper right', fontsize=15)
+ax[2,0].tick_params(axis='x', rotation=0)
+
+ax[2,1].set_title('Adj Close price history of MSFT', fontsize = 15)
+ax[2,1].set_xlabel('Date', fontsize = 15)
+ax[2,1].legend(loc='upper right', fontsize=15)
+ax[2,1].tick_params(axis='x', rotation=0)
 
 plt.tight_layout()
 plt.show()
