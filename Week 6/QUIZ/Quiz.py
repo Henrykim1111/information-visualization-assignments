@@ -1,3 +1,13 @@
+# Q1 : 데이터셋 row, column 개수 구하기
+# Q2 : 결측치가 0.2 이상인 컬럼 지우고 콘솔에 띄우기
+# Q3 : 수정한 데이터셋이 결측치 없는지 재확인
+# Q4 : tip, total의 각각 평균과 분산 구하기
+# Q5 : 팁 비율이 0, 10~15, 15~20, 20이상 인 개수 각각 구하기
+# Q6 : tip & total 로 히스토그램 그리기
+# Q7 : 두 가지 속성 사이에서 코베리언스 구하기
+
+
+
 #%% Prior setting
 import pandas as pd
 import seaborn as sns
